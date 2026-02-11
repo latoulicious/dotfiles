@@ -1,0 +1,78 @@
+@import '../palette/global.css';
+
+* {
+    font-family: "SF Pro", "Font Awesome 6", "Noto Sans Emoji", sans-serif;
+    font-size: 10px;  /* Reduced from 10px */
+    font-weight: 500;
+}
+
+window#waybar {
+    background-color: alpha(@bg-primary, 0.90);
+    color: @text-primary;
+    border-radius: 10px;  /* Reduced from 12px */
+    padding: 0 6px;  /* Reduced from 8px */
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+    background: transparent;
+}
+
+#workspaces {
+    padding: 0;
+    margin: 0;
+}
+
+#workspaces button {
+    /* background-color: alpha(@bg-secondary, 0.5); */
+    color: @text-secondary;
+    border: none;
+    border-radius: 6px;  /* Reduced from 8px */
+    margin: 3px 2px;  /* Reduced from 4px 3px */
+    padding: 3px 8px;  /* Reduced from 4px 10px */
+    min-width: 24px;  /* Reduced from 28px */
+    transition: background-color 0.3s ease;
+}
+
+#workspaces button.active {
+    background-color: @accent-primary;
+    color: @bg-primary;
+    border-radius: 8px;  /* Reduced from 10px */
+}
+
+#workspaces button:hover {
+    background-color: @hover;
+}
+
+#clock,
+#battery,
+#wireplumber,
+#backlight,
+#custom-swaync,
+#custom-power {
+    background: transparent;
+    color: @text-primary;
+    border: none;
+    padding: 3px 6px;  /* Reduced from 4px 8px */
+    margin: 3px 2px;  /* Reduced from 4px 2px */
+}
+
+#custom-cava {
+    /* background-color: alpha(@bg-secondary, 0.5); */
+    color: @accent-primary;
+    border: none;
+    border-radius: 6px;  /* Reduced from 8px */
+    padding: 3px 8px;  /* Reduced from 4px 10px */
+    margin: 3px 2px;  /* Reduced from 4px 3px */
+    font-family: monospace;
+    font-size: 6px;  /* Reduced from 7px */
+}
+
+#battery.critical:not(.charging) {
+    color: @error;
+}
+
+#battery.warning:not(.charging) {
+    color: @warning;
+}

@@ -1,0 +1,103 @@
+{
+  "layer": "top",
+  "position": "top",
+  "margin-top": 6,
+  "margin-left": 12,
+  "margin-right": 12,
+  "spacing": 0,
+
+  // Module order
+  "modules-left": ["hyprland/workspaces", "custom/cava"],
+  "modules-center": ["clock"],
+  "modules-right": [
+    // "backlight",
+    "network",
+    // "bluetooth",
+    "wireplumber",
+    "battery",
+    "custom/swaync",
+    "custom/power",
+  ],
+  // Modules configuration
+  "clock": {
+    "format": "{:%I:%M %p}", // shows 02:16 AM
+    "tooltip-format": "{:%A %d %B %Y}", // Sunday | 17 August 2025
+  },
+  "network": {
+    "format-wifi": " ",
+    "format-disconnected": " ",
+    "tooltip-format": "{essid} {signalStrength}%",
+    "tooltip-format-disconnected": "Disconnected",
+    "on-click": "sh -c 'pgrep -x nm-connection-editor >/dev/null || (nm-connection-editor & disown)'",
+  },
+  "bluetooth": {
+    "format": "",
+    "tooltip-format": "{device_alias} connected",
+    "on-click": "blueman-manager",
+  },
+  "wireplumber": {
+    "format": "{icon}",
+    "format-bluetooth": "{icon} {volume}%  {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""],
+    },
+    "on-click": "pavucontrol",
+  },
+  "backlight": {
+    "format": "{icon}",
+    "format-icons": ["", "", "", "", "", "", "", "", ""],
+    "tooltip-format": "{percent}% ",
+    "on-click": "/home/latoulicious/Scripts/brightness-slider",
+  },
+  "battery": {
+    "format": "{icon}",
+    "format-charging": "{icon}", // optional: keep same look while charging
+    "format-plugged": "{icon}",
+    "format-full": "{icon}",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip-format": "{capacity}%",
+    "states": {
+      "critical": 20, // < 20% → adds `.critical` class
+      "warning": 35, // optional
+    },
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "format-icons": {
+      "urgent": " ",
+      // "active": " ",
+      "default": " ",
+    },
+    "sort-by-number": true,
+  },
+  "custom/cava": {
+    "exec": "~/.config/waybar/scripts/cava-waybar.sh",
+    "return-type": "",
+    "format": "{}",
+    "tooltip": false,
+    "max-length": 15,
+  },
+  "custom/swaync": {
+    "format": "", // Bell icon
+    "tooltip": false, // Disable tooltip (optional)
+    "on-click": "swaync-client -t", // Toggle notification center
+    "on-click-right": "swaync-client -d", // Dismiss all
+    "interval": 5, // Don't refresh automatically
+  },
+  "custom/power": {
+    "format": "⏻",
+    "tooltip": false,
+    "on-click": "bash -lc 'pgrep -x wlogout >/dev/null && killall wlogout || wlogout'",
+  },
+}

@@ -1,0 +1,53 @@
+* {
+    background-image: none;
+    box-shadow: none;
+}
+
+window {
+    background-color: rgba(29, 32, 33, 0.95);
+}
+
+button {
+    color: #ebdbb2;
+    background-color: #282828;
+    border: 2px solid #504945;
+    border-radius: 8px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25%;
+    margin: 20px;
+    transition: all 0.2s ease-in-out;
+}
+
+button:focus,
+button:active,
+button:hover {
+    background-color: #3c3836;
+    border: 2px solid #d79921;
+    color: #fabd2f;
+    outline-style: none;
+}
+
+#lock {
+    background-image: image(url("/usr/share/wlogout/icons/lock.png"));
+}
+
+#logout {
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"));
+}
+
+#suspend {
+    background-image: image(url("/usr/share/wlogout/icons/suspend.png"));
+}
+
+#hibernate {
+    background-image: image(url("/usr/share/wlogout/icons/hibernate.png"));
+}
+
+#shutdown {
+    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"));
+}
+
+#reboot {
+    background-image: image(url("/usr/share/wlogout/icons/reboot.png"));
+}
