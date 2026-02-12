@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Get current brightness percentage (integer 0..100)
+current="$(brightnessctl -m | awk -F, 'NR==1{gsub(/%/,"",$4); print $4}')"
+current="${current:-50}"
+
+# Prefer YAD for real-time updates; fall back to Zenity for apply-on-close
+if command -v yad >/dev/null 2>&1; then
+  # Real-time slider: prints values as you drag; we apply each one.
+  # --mouse places it near the cursor; tweak geometry if preferred.
+  yad --scale \
+      --value="$current" --min-value=1 --max-value=100 --step=1 \
+      --print-partial --undecorated --mouse --on-top --no-buttons \
+      --title="Brightness" \
+  | while read -r v; do
+      [ -n "$v" ] && brightnessctl set "${v}%">/dev/null
+    done
+elif command -v zenity >/dev/null 2>&1; then
+  v="$(zenity --scale --value="$current" --min-value=1 --max-value=100 --step=1 \
+              --text="Set screen brightness" --title="Brightness")" || exit 0
+  [ -n "${v:-}" ] && brightnessctl set "${v}%">/dev/null
+else
+  notify-send "Brightness slider" "Install yad or zenity for a GUI slider."
+  exit 1
+fi
